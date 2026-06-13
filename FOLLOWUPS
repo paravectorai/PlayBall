@@ -1,0 +1,4 @@
+SVG icons are placeholders — replace with rasterized PNGs (180×180, 512×512) before iOS add-to-home-screen testing in T-040
+Two npm audit moderate vulnerabilities (in glob and source-map transitive deps from workbox tooling) — not exploitable in a client-side-only app; note for T-043 performance/audit pass
+Remaining (manual, requires physical devices):
+The ticket is in In Review. A human tester needs to run the device checklist in t-042.md — install flow, offline mode, safe-area check on iPhone notch, and the full happy path. Any failures should open a new bug ticket before T-045 sign-off.

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Team Tracker | Roster</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-state:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+        /* Custom scrollbar for data-heavy sections */
+        .custom-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #c1c8c2;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#d7dadf",
+                        "surface-container-high": "#e5e8ee",
+                        "on-secondary-container": "#626566",
+                        "on-tertiary-fixed-variant": "#842500",
+                        "on-surface": "#181c20",
+                        "surface-bright": "#f7f9ff",
+                        "primary-fixed-dim": "#a5d0b9",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#414844",
+                        "primary-fixed": "#c1ecd4",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#711f00",
+                        "surface-container": "#ebeef3",
+                        "tertiary": "#4c1200",
+                        "on-primary-container": "#86af99",
+                        "inverse-primary": "#a5d0b9",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#454748",
+                        "primary": "#012d1d",
+                        "on-background": "#181c20",
+                        "inverse-on-surface": "#eef1f6",
+                        "primary-container": "#1b4332",
+                        "secondary-fixed-dim": "#c5c7c8",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c1c8c2",
+                        "surface": "#f7f9ff",
+                        "on-primary-fixed-variant": "#274e3d",
+                        "tertiary-fixed-dim": "#ffb59e",
+                        "surface-variant": "#e0e3e8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#e1e3e4",
+                        "surface-container-highest": "#e0e3e8",
+                        "on-primary-fixed": "#002114",
+                        "surface-container-low": "#f1f4f9",
+                        "on-tertiary-container": "#ff835a",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#e1e3e4",
+                        "inverse-surface": "#2d3135",
+                        "background": "#f7f9ff",
+                        "on-secondary-fixed": "#191c1d",
+                        "secondary": "#5c5f60",
+                        "on-error": "#ffffff",
+                        "outline": "#717973",
+                        "on-tertiary-fixed": "#390b00",
+                        "surface-tint": "#3f6653"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "sm": "12px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "base": "4px",
+                        "xs": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "data-mono": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-mono": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-md text-body-md pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-primary dark:bg-primary-container border-b border-outline-variant text-on-primary dark:text-on-primary-container">
+<div class="flex items-center gap-xs">
+<div class="w-10 h-10 rounded-full bg-on-primary/10 flex items-center justify-center overflow-hidden">
+<img alt="Team Logo" class="w-8 h-8" src="https://lh3.googleusercontent.com/aida/AP1WRLuK6137K1dwVD-t1s5G6fKbUvmFftQAoTCsQBcNw3emWjeGnxyjoLTirC0Y8KhYdYPm-XRwupfGC3w0WBCmjoNZssxVzy9jrDSuzBNchFzsuVfAgh7nWnD0D81fsmIkv1AiX2EkmVm9HXpligXBIL2YlpC83e1v4RNxJXgvYRlhimcwW0JG6tID1ga5GC8hDQHDwvoDA0bAJ_htFxFbunwT0rAlUrKEfXQNogx9L3kvKJtr3hh-I44huhw"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold">Team Tracker</h1>
+</div>
+<div class="flex items-center bg-on-primary/10 px-xs py-base rounded-lg active:scale-95 transition-transform cursor-pointer">
+<span class="font-label-bold text-label-bold">2024 Season</span>
+<span class="material-symbols-outlined ml-base">expand_more</span>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="pt-20 px-margin-mobile">
+<!-- Search and Filter Section -->
+<section class="mt-lg mb-lg">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-14 pl-12 pr-4 bg-surface-container-low border-b border-outline focus:border-b-2 focus:border-primary transition-all duration-200 outline-none placeholder:text-secondary" placeholder="Search roster by name or number..." type="text"/>
+</div>
+<div class="flex gap-xs mt-md overflow-x-auto pb-xs custom-scroll">
+<button class="px-md py-base bg-primary text-on-primary rounded-full font-label-bold text-label-bold flex-shrink-0 active:scale-95 transition-transform">All Players</button>
+<button class="px-md py-base border border-outline text-secondary rounded-full font-label-bold text-label-bold flex-shrink-0 hover:bg-surface-container-high transition-colors">Pitchers</button>
+<button class="px-md py-base border border-outline text-secondary rounded-full font-label-bold text-label-bold flex-shrink-0 hover:bg-surface-container-high transition-colors">Infielders</button>
+<button class="px-md py-base border border-outline text-secondary rounded-full font-label-bold text-label-bold flex-shrink-0 hover:bg-surface-container-high transition-colors">Outfielders</button>
+<button class="px-md py-base border border-outline text-secondary rounded-full font-label-bold text-label-bold flex-shrink-0 hover:bg-surface-container-high transition-colors">Catchers</button>
+</div>
+</section>
+<!-- Player List (Bento-style Cards) -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Player Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-md flex flex-col gap-md active:bg-surface-container transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-dim overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a focused baseball player wearing a dark green team jersey. The lighting is crisp and high-contrast, typical of sports photography, with a clean, neutral background. The athlete has a determined expression, fitting the high-stakes professional sports analytics environment of the Team Tracker application." src="https://lh3.googleusercontent.com/aida/AP1WRLvrfzZWqlah65uJTyeihikdvSihnDauNoP9x4sTRg_zpNZ56Ad3ximOUfXBQxTTp72ETS2XlHG37Tfw240O7NkqQBSMxKOJC-FlpW9TQ1H1RoT63oEHXlOaYMjnysD417Z3Qn2J_DWe8LSCennSgrq2lCbK-13jSCePOr0UVhKHan7HXOKfhfTPEaxT_saC4f65qxnuxy4g74U9IBOMScs0Q6N_XCEE0diDHunCNVJwnLSab4SbZZErVhA"/>
+<div class="absolute bottom-0 right-0 bg-primary text-on-primary px-1 rounded-tl-lg font-data-mono text-[12px]">27</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-primary">Marcus Vancleave</h3>
+<div class="flex items-center gap-xs mt-base">
+<span class="bg-primary text-on-primary text-[10px] px-xs py-[2px] rounded-full font-bold">CF</span>
+<span class="text-secondary font-label-bold text-label-bold italic">L/R</span>
+</div>
+</div>
+<button class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">more_vert</button>
+</div>
+<div class="grid grid-cols-3 gap-base border-t border-outline-variant pt-md">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">AVG</span>
+<span class="font-data-mono text-data-mono text-primary">.312</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">HR</span>
+<span class="font-data-mono text-data-mono text-primary">18</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">OPS</span>
+<span class="font-data-mono text-data-mono text-primary">.942</span>
+</div>
+</div>
+<div class="h-1 bg-surface-container-high w-full overflow-hidden">
+<div class="h-full bg-primary w-[85%]"></div>
+</div>
+</div>
+<!-- Player Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-md flex flex-col gap-md active:bg-surface-container transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-dim overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Close-up studio portrait of a veteran baseball pitcher with a slight beard, looking intensely toward the camera. He wears a dark forest green uniform with a white trim. The lighting is dramatic and directional, creating a powerful cinematic aesthetic that highlights his athletic features and focused gaze." src="https://lh3.googleusercontent.com/aida/AP1WRLsAxWuNH0vIYUjuI9iOxYOI3eqs-rE-NJbnbaMRA7OYnurarF8oCdq2ILU01SDK1OsQarIE_9shswepoU-OqALt0YK7Y26jdA3HroIwil9hGSr3Jv7R_-3KKjhqUQaHXaK0aznN31uQPU6N85cc92n3AeqVCB6L3wyWPybVb6BJ9-HGSoCeF8p6cf7lOHiYCREINgJOuvG23Ngu6CqTPhtFDiTP8jS2DIRSaoiZ1GzibAcdHTqvFvHRNCw"/>
+<div class="absolute bottom-0 right-0 bg-primary text-on-primary px-1 rounded-tl-lg font-data-mono text-[12px]">44</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-primary">Julian Thorne</h3>
+<div class="flex items-center gap-xs mt-base">
+<span class="bg-primary text-on-primary text-[10px] px-xs py-[2px] rounded-full font-bold">SP</span>
+<span class="text-secondary font-label-bold text-label-bold italic">R/R</span>
+</div>
+</div>
+<button class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">more_vert</button>
+</div>
+<div class="grid grid-cols-3 gap-base border-t border-outline-variant pt-md">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">ERA</span>
+<span class="font-data-mono text-data-mono text-primary">2.45</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">WHIP</span>
+<span class="font-data-mono text-data-mono text-primary">1.02</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">K/9</span>
+<span class="font-data-mono text-data-mono text-primary">11.4</span>
+</div>
+</div>
+<div class="h-1 bg-surface-container-high w-full overflow-hidden">
+<div class="h-full bg-primary w-[92%]"></div>
+</div>
+</div>
+<!-- Player Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-md flex flex-col gap-md active:bg-surface-container transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-dim overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="A young baseball shortstop with short hair and a determined grin, wearing a green jersey with the team logo visible. The lighting is warm like an afternoon golden hour in a stadium, casting long soft shadows. The visual style is crisp and modern, emphasizing the player's readiness and the clean lines of his uniform." src="https://lh3.googleusercontent.com/aida/AP1WRLuFAusfvlPBdqfwhTN2JhaivGVL5OL4SZl54w6MG-ENqS2EOWRs22yIqt-zzjbm_m4r7kbxSLEq5XbbHrF1lzxrs2IVycNm-AfyEqoZ_hzDET-o7TRv4j_YV-e6FOTF2kL0b4geq7xzM-qXxCD_zPp86EoqZZrLq1l3mBtrbc71qNKgcQxv9PiN7M_-FgnxCxbFnMS1GrXZCsWT004L10_0gEKHUUSFEyuZHZksHdWvl1ae8cgPruMuYVo"/>
+<div class="absolute bottom-0 right-0 bg-primary text-on-primary px-1 rounded-tl-lg font-data-mono text-[12px]">02</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-primary">Leo Santana</h3>
+<div class="flex items-center gap-xs mt-base">
+<span class="bg-primary text-on-primary text-[10px] px-xs py-[2px] rounded-full font-bold">SS</span>
+<span class="text-secondary font-label-bold text-label-bold italic">R/R</span>
+</div>
+</div>
+<button class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">more_vert</button>
+</div>
+<div class="grid grid-cols-3 gap-base border-t border-outline-variant pt-md">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">AVG</span>
+<span class="font-data-mono text-data-mono text-primary">.285</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">SB</span>
+<span class="font-data-mono text-data-mono text-primary">34</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">FLD%</span>
+<span class="font-data-mono text-data-mono text-primary">.988</span>
+</div>
+</div>
+<div class="h-1 bg-surface-container-high w-full overflow-hidden">
+<div class="h-full bg-primary w-[78%]"></div>
+</div>
+</div>
+<!-- Player Card 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-md flex flex-col gap-md active:bg-surface-container transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-dim overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="A rugged baseball catcher in full gear with his helmet off, wiped from sweat. The scene is set in an outdoor dugout with sunlight filtering through the bench slats. The aesthetic is gritty but clean, focusing on the textures of the leather glove and the high-contrast lighting of the mid-day sun against his team green apparel." src="https://lh3.googleusercontent.com/aida/AP1WRLsTJFxTUHbpcH4XOqAZCrpNJFgVF6AzhpI1cS88cCqSszyARiEcT_PD_1A8JfCGvW_Pt66XjmVQFU5IGBohQc0KVzJGurIOXkb9_hL1rU4sEpms_ngVgGVwlOsDmrcEUJLjSOSYuCsQiU5GWhbqKr5u03Xbtg0YoHRKqZd2J2qTNNyGqgOlA9soAbmirVKSvIS7RlWAYne7aDtM90yptTW8Yki9tyYJv5wuKaCYj75PdwQl4a0iej5RVok"/>
+<div class="absolute bottom-0 right-0 bg-primary text-on-primary px-1 rounded-tl-lg font-data-mono text-[12px]">15</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-primary">Brock Miller</h3>
+<div class="flex items-center gap-xs mt-base">
+<span class="bg-primary text-on-primary text-[10px] px-xs py-[2px] rounded-full font-bold">C</span>
+<span class="text-secondary font-label-bold text-label-bold italic">R/R</span>
+</div>
+</div>
+<button class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">more_vert</button>
+</div>
+<div class="grid grid-cols-3 gap-base border-t border-outline-variant pt-md">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">AVG</span>
+<span class="font-data-mono text-data-mono text-primary">.260</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">RBI</span>
+<span class="font-data-mono text-data-mono text-primary">62</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">CS%</span>
+<span class="font-data-mono text-data-mono text-primary">42.1</span>
+</div>
+</div>
+<div class="h-1 bg-surface-container-high w-full overflow-hidden">
+<div class="h-full bg-primary w-[65%]"></div>
+</div>
+</div>
+<!-- Player Card 5 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-md flex flex-col gap-md active:bg-surface-container transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-dim overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="A portrait of a left-handed baseball hitter focused on his training. He is seen from the side, wearing a training cap and a green performance shirt. High-key lighting creates a bright and energetic mood, reflecting the precision and rigorous data-driven training of the modern baseball environment featured in the application." src="https://lh3.googleusercontent.com/aida/AP1WRLvC8hpbn93Ti_h3xqKkCFvwy-k7YagFNQ-fxucDPt2r5q7Q6kQW7mI_TL8CWBiJuksAF0qIZpFNKltVynDTKyF2bL58PlLsP1ZjyRtCfowpHR_nVshgLzPVhYticl1FWnwaosyCpzoJndPBk4yj8LF9LmGvI2zdJLiKE6DVuwj29oauO7PYBsUUoaIaOxJzOSV7IGSYzhuzL6tOAOCQ9e7BwSi-ZcbblqtoiYspRRc6J5macJJ4iDt5eWc"/>
+<div class="absolute bottom-0 right-0 bg-primary text-on-primary px-1 rounded-tl-lg font-data-mono text-[12px]">56</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-primary">Kevin O'Neal</h3>
+<div class="flex items-center gap-xs mt-base">
+<span class="bg-primary text-on-primary text-[10px] px-xs py-[2px] rounded-full font-bold">1B</span>
+<span class="text-secondary font-label-bold text-label-bold italic">L/L</span>
+</div>
+</div>
+<button class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">more_vert</button>
+</div>
+<div class="grid grid-cols-3 gap-base border-t border-outline-variant pt-md">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">AVG</span>
+<span class="font-data-mono text-data-mono text-primary">.301</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">OBP</span>
+<span class="font-data-mono text-data-mono text-primary">.415</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">SLG</span>
+<span class="font-data-mono text-data-mono text-primary">.510</span>
+</div>
+</div>
+<div class="h-1 bg-surface-container-high w-full overflow-hidden">
+<div class="h-full bg-primary w-[82%]"></div>
+</div>
+</div>
+<!-- Player Card 6 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-md flex flex-col gap-md active:bg-surface-container transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-dim overflow-hidden flex-shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Action portrait of a baseball fielder in a dynamic athletic pose. The image uses sharp focus and high-shutter speed to capture the intensity. The lighting is stadium-bright, emphasizing vibrant forest green colors. The style is modern corporate sports, prioritizing clarity and professional rigor as defined in the design guidelines." src="https://lh3.googleusercontent.com/aida/AP1WRLt9grtkHjXiGUThTXz6-MQFLx9MPzaWahwu5zpgCcg3W4MuDngE2HlAjYX7IWR-pFhc4KZEx17UOF8ALGhzEFa3qO-fKujlBXIn3h2nSD7Vpd5jFvmpld6I_JdwbOUSaPADoLtQTwcris5hRFcUtRxb66rJ5fU_4KouwqPcE0qOzgJvQHQEyVAd8pV6O43pFqTFGrH0oqW8EFRaOOebZBUaaV-6A0AotWefQrrZJMNcb7yJjCap8MtI7w"/>
+<div class="absolute bottom-0 right-0 bg-primary text-on-primary px-1 rounded-tl-lg font-data-mono text-[12px]">09</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-primary">Damon Hayes</h3>
+<div class="flex items-center gap-xs mt-base">
+<span class="bg-primary text-on-primary text-[10px] px-xs py-[2px] rounded-full font-bold">RF</span>
+<span class="text-secondary font-label-bold text-label-bold italic">R/R</span>
+</div>
+</div>
+<button class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">more_vert</button>
+</div>
+<div class="grid grid-cols-3 gap-base border-t border-outline-variant pt-md">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">AVG</span>
+<span class="font-data-mono text-data-mono text-primary">.244</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">ARM</span>
+<span class="font-data-mono text-data-mono text-primary">98</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase text-secondary font-bold tracking-wider">WAR</span>
+<span class="font-data-mono text-data-mono text-primary">2.1</span>
+</div>
+</div>
+<div class="h-1 bg-surface-container-high w-full overflow-hidden">
+<div class="h-full bg-primary w-[55%]"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB: Add Player -->
+<button class="fixed bottom-24 right-margin-mobile w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center z-50 hover:shadow-xl active:scale-90 transition-all duration-150">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-base pb-safe h-20 bg-surface dark:bg-inverse-surface border-t border-outline-variant">
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest cursor-pointer transition-all active:scale-90">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-bold text-label-bold">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-fixed-variant text-on-primary-container dark:text-on-primary-fixed-variant rounded-full px-4 py-1 active:scale-90 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-bold text-label-bold">Roster</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest cursor-pointer transition-all active:scale-90">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-bold text-label-bold">Stats</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest cursor-pointer transition-all active:scale-90">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-bold text-label-bold">Profile</span>
+</div>
+</nav>
+<script>
+        // Simple micro-interaction for active states and search focus
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('.material-symbols-outlined').classList.replace('text-outline', 'text-primary');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('.material-symbols-outlined').classList.replace('text-primary', 'text-outline');
+            });
+        });
+
+        // Hover effect for player cards
+        const cards = document.querySelectorAll('.bg-surface-container-lowest');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = 'var(--primary)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = '';
+            });
+        });
+    </script>
+</body></html>

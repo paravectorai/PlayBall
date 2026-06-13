@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Team Tracker Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#d7dadf",
+                        "surface-container-high": "#e5e8ee",
+                        "on-secondary-container": "#626566",
+                        "on-tertiary-fixed-variant": "#842500",
+                        "on-surface": "#181c20",
+                        "surface-bright": "#f7f9ff",
+                        "primary-fixed-dim": "#a5d0b9",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#414844",
+                        "primary-fixed": "#c1ecd4",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#711f00",
+                        "surface-container": "#ebeef3",
+                        "tertiary": "#4c1200",
+                        "on-primary-container": "#86af99",
+                        "inverse-primary": "#a5d0b9",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#454748",
+                        "primary": "#012d1d",
+                        "on-background": "#181c20",
+                        "inverse-on-surface": "#eef1f6",
+                        "primary-container": "#1b4332",
+                        "secondary-fixed-dim": "#c5c7c8",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c1c8c2",
+                        "surface": "#f7f9ff",
+                        "on-primary-fixed-variant": "#274e3d",
+                        "tertiary-fixed-dim": "#ffb59e",
+                        "surface-variant": "#e0e3e8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#e1e3e4",
+                        "surface-container-highest": "#e0e3e8",
+                        "on-primary-fixed": "#002114",
+                        "surface-container-low": "#f1f4f9",
+                        "on-tertiary-container": "#ff835a",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#e1e3e4",
+                        "inverse-surface": "#2d3135",
+                        "background": "#f7f9ff",
+                        "on-secondary-fixed": "#191c1d",
+                        "secondary": "#5c5f60",
+                        "on-error": "#ffffff",
+                        "outline": "#717973",
+                        "on-tertiary-fixed": "#390b00",
+                        "surface-tint": "#3f6653"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "sm": "12px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "base": "4px",
+                        "xs": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "data-mono": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "data-mono": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9ff; }
+        .data-card { border: 1px solid #c1c8c2; transition: all 0.2s ease; }
+        .data-card:hover { border-color: #012d1d; }
+        .stadium-border-bottom { border-bottom: 4px solid #012d1d; }
+        .custom-scroll::-webkit-scrollbar { height: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #c1c8c2; border-radius: 4px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-primary dark:bg-primary-container border-b border-outline-variant">
+<div class="flex items-center gap-xs">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-on-primary/20">
+<img alt="Team Logo" class="w-full h-full object-cover" data-alt="A professional circular sports logo featuring a minimalist stylized emerald green baseball diamond icon against a dark forest green background. The style is modern corporate with sharp geometric lines and a subtle gloss finish, evoking a sense of elite athletic excellence and precise data analytics." src="https://lh3.googleusercontent.com/aida/AP1WRLtuPeHHG5vhEm4EPwtMs0CZy4tO2tFI1KVFHQcaw2pBU_8VaDQq3PiIfkrgnL6cmZ3djgZZJpl8liekSNZE932Mz0brk2B6bQUywo1u4eFrw1vg_8IxRm2eXSI_oN8RCIDR11_OaGHt49B_kXS-NmS5qeibqLf5nQMQktCu2kabCqM3aqLVyT919l5iXPhKuZ8EjonARpiw0XqowpCo1MzV35saZlgZI8SzHdP83rqLwMnT1_NWyc8Ki64"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-primary dark:text-on-primary-container">Team Tracker</h1>
+</div>
+<div class="hidden md:flex items-center gap-lg">
+<nav class="flex gap-md">
+<a class="text-on-primary font-bold hover:bg-primary-container/20 px-3 py-2 rounded-lg transition-all" href="#">Dashboard</a>
+<a class="text-on-primary/70 hover:bg-primary-container/20 px-3 py-2 rounded-lg transition-all" href="#">Roster</a>
+<a class="text-on-primary/70 hover:bg-primary-container/20 px-3 py-2 rounded-lg transition-all" href="#">Stats</a>
+<a class="text-on-primary/70 hover:bg-primary-container/20 px-3 py-2 rounded-lg transition-all" href="#">Profile</a>
+</nav>
+<div class="h-8 w-[1px] bg-on-primary/20"></div>
+<span class="text-on-primary font-label-bold text-label-bold px-3 py-1 border border-on-primary/30 rounded-full">2024 Season</span>
+</div>
+<button class="md:hidden text-on-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<main class="pt-20 px-margin-mobile md:px-margin-desktop max-w-[1280px] mx-auto space-y-lg mb-xl">
+<!-- Hero Section: Next Game -->
+<section class="mt-lg">
+<div class="bg-primary text-on-primary p-lg rounded-xl shadow-sm overflow-hidden relative">
+<!-- Subtle background pattern -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+<div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Upcoming Match</span>
+<span class="text-on-primary/70 font-label-bold text-label-bold">July 14, 7:05 PM</span>
+</div>
+<h2 class="font-display-lg text-headline-lg-mobile md:text-headline-lg mb-base">Next Game: vs. Tigers</h2>
+<p class="text-on-primary/80 font-body-md text-body-md">Comerica Park • Detroit, MI</p>
+</div>
+<div class="flex items-center gap-md">
+<div class="text-center">
+<div class="w-16 h-16 bg-surface-container-lowest/10 rounded-full flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-4xl" data-icon="sports_baseball">sports_baseball</span>
+</div>
+<p class="text-[12px] font-bold">HOME</p>
+</div>
+<div class="text-on-primary/40 font-display-lg text-headline-lg">VS</div>
+<div class="text-center">
+<div class="w-16 h-16 bg-surface-container-lowest/10 rounded-full flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined text-4xl" data-icon="pets">pets</span>
+</div>
+<p class="text-[12px] font-bold">DET</p>
+</div>
+</div>
+<button class="bg-primary-fixed text-on-primary-fixed px-lg py-md rounded-lg font-label-bold flex items-center justify-center gap-xs hover:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+                        Set Reminder
+                    </button>
+</div>
+</div>
+</section>
+<!-- Main Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Season Leaderboard (Left Side) -->
+<div class="lg:col-span-8 space-y-lg">
+<div class="bg-surface-container-lowest data-card p-lg rounded-xl flex flex-col h-full">
+<div class="flex justify-between items-center mb-lg">
+<div>
+<h3 class="font-title-md text-title-md text-primary">Season Leaderboard</h3>
+<p class="text-secondary font-body-md text-[14px]">Top performing hitters this season</p>
+</div>
+<button class="text-primary hover:underline font-label-bold">View All</button>
+</div>
+<div class="overflow-x-auto custom-scroll">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant">
+<th class="py-md font-label-bold text-secondary">PLAYER</th>
+<th class="py-md font-label-bold text-secondary text-center">GP</th>
+<th class="py-md font-label-bold text-secondary text-center">AVG</th>
+<th class="py-md font-label-bold text-secondary text-center">HR</th>
+<th class="py-md font-label-bold text-secondary text-center">RBI</th>
+<th class="py-md font-label-bold text-secondary text-right">OPS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high overflow-hidden">
+<img alt="Player 1" class="w-full h-full object-cover" data-alt="A professional headshot of a confident baseball player in a clean white team jersey. The lighting is crisp and studio-quality, emphasizing a modern corporate sports aesthetic. The background is a soft, neutral grey-blue that complements the Stadium Green accents of the UI." src="https://lh3.googleusercontent.com/aida/AP1WRLttphigYPkTjMAihTTOQKXGwPgsli05non7GSbWiOMNyoz-7ycq1cDVSC_FT_bKWssB1PQ3cjbN1SXMbKJqo32DDoHy2j8skDIT5SakgDicGAqxWjUav9_pJWnk1uYLMi-A8TovSwkWvqp25j7l8bN00St3FrW4KCr7SVC1GsL1aw2SABXFseNQV1DEOwNhXaWPDXv6ElDmYnw70qcE8Dyq2Pkl4KmOxIW9ilqvj2gNv1vMO2agE895i8U"/>
+</div>
+<div>
+<p class="font-label-bold text-on-surface">Marcus "Bolt" Reed</p>
+<p class="text-[12px] text-secondary">CF • #24</p>
+</div>
+</div>
+</td>
+<td class="py-md text-center font-data-mono text-on-surface">82</td>
+<td class="py-md text-center">
+<span class="font-data-mono text-primary text-lg">.342</span>
+</td>
+<td class="py-md text-center font-data-mono text-on-surface">24</td>
+<td class="py-md text-center font-data-mono text-on-surface">68</td>
+<td class="py-md text-right font-data-mono text-on-surface font-bold">.982</td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high overflow-hidden">
+<img alt="Player 2" class="w-full h-full object-cover" data-alt="A high-contrast profile photo of a focused athlete wearing a baseball cap. The scene uses high-key lighting to maintain a bright, clean light-mode feel. Professional athletic imagery with sharp focus on the face, evoking reliability and intense game-time focus." src="https://lh3.googleusercontent.com/aida/AP1WRLt58z59PuOeS_smVSqGxCFE0vU0DGuRao8D23iZlvK-iaIfucspMvSOl1yP-0knBo8MIeFOPspvda9SNZWye1sYK48ldJou6RMO7SH2KDmnH-VpYgBLYEId_g-SQ5VbQnvmB8vHCTl68hFfC87tqBsZSmJXpUtEktsM3JCIlUlECJwHe8kexXniYocExB4_bdEk_Vp1BCRmsP1tXgUNxOB6ibEVU5ZykR4oADQG5Ioi3XS-MluOVMod5Xs"/>
+</div>
+<div>
+<p class="font-label-bold text-on-surface">S. Yamamoto</p>
+<p class="text-[12px] text-secondary">DH • #11</p>
+</div>
+</div>
+</td>
+<td class="py-md text-center font-data-mono text-on-surface">78</td>
+<td class="py-md text-center">
+<span class="font-data-mono text-primary text-lg">.315</span>
+</td>
+<td class="py-md text-center font-data-mono text-on-surface">19</td>
+<td class="py-md text-center font-data-mono text-on-surface">52</td>
+<td class="py-md text-right font-data-mono text-on-surface font-bold">.895</td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high overflow-hidden">
+<img alt="Player 3" class="w-full h-full object-cover" data-alt="A portrait of a smiling baseball player in professional uniform, set against a bright, airy background. The image is clean and follows a modern corporate aesthetic with high-key lighting. The color palette is composed of crisp whites and deep stadium greens to match the brand identity." src="https://lh3.googleusercontent.com/aida/AP1WRLuQ97jMKKSHHECy6JaOYkwAHV5rCFb43BDg_yD_Z_ASzDV85lzaGbXhBw3Hpm8oO4BTC3T99wHJGEA3Czexb_-TMNevmqc1dzd2IArulXbnMOGYJhWayRvv9BTYBdOgB3F3h1w7b2OWxoROjsVhBC-web1AfeyruFGQblSDlOduWJ-s_CqTUbRaOilXRq8k7wfoPbi54q-bIvWWkJM7YUP4FFnOsvnoVhd0VZi_Z3kEUFYM2AyB7DvDe0U"/>
+</div>
+<div>
+<p class="font-label-bold text-on-surface">David "Grizzly" Vance</p>
+<p class="text-[12px] text-secondary">1B • #45</p>
+</div>
+</div>
+</td>
+<td class="py-md text-center font-data-mono text-on-surface">81</td>
+<td class="py-md text-center">
+<span class="font-data-mono text-primary text-lg">.298</span>
+</td>
+<td class="py-md text-center font-data-mono text-on-surface">31</td>
+<td class="py-md text-center font-data-mono text-on-surface">79</td>
+<td class="py-md text-right font-data-mono text-on-surface font-bold">.912</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Performance Trend & Quick Stats (Right Side) -->
+<div class="lg:col-span-4 space-y-lg">
+<!-- Recent Performance Chart -->
+<div class="bg-surface-container-lowest data-card p-lg rounded-xl stadium-border-bottom">
+<h3 class="font-title-md text-title-md text-primary mb-md">Recent Performance</h3>
+<div class="h-48 w-full relative flex items-end justify-between gap-base pt-md">
+<!-- Simulated Chart -->
+<div class="flex-1 bg-surface-container-high relative group" style="height: 60%;">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-base opacity-0 group-hover:opacity-100 bg-primary text-on-primary text-[10px] py-1 px-2 rounded transition-opacity">W</div>
+</div>
+<div class="flex-1 bg-primary relative group" style="height: 85%;">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-base opacity-0 group-hover:opacity-100 bg-primary text-on-primary text-[10px] py-1 px-2 rounded transition-opacity">W</div>
+</div>
+<div class="flex-1 bg-tertiary relative group" style="height: 40%;">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-base opacity-0 group-hover:opacity-100 bg-tertiary text-on-primary text-[10px] py-1 px-2 rounded transition-opacity">L</div>
+</div>
+<div class="flex-1 bg-primary relative group" style="height: 70%;">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-base opacity-0 group-hover:opacity-100 bg-primary text-on-primary text-[10px] py-1 px-2 rounded transition-opacity">W</div>
+</div>
+<div class="flex-1 bg-primary relative group" style="height: 95%;">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-base opacity-0 group-hover:opacity-100 bg-primary text-on-primary text-[10px] py-1 px-2 rounded transition-opacity">W</div>
+</div>
+<div class="flex-1 bg-surface-container-high relative group" style="height: 55%;">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-base opacity-0 group-hover:opacity-100 bg-primary text-on-primary text-[10px] py-1 px-2 rounded transition-opacity">W</div>
+</div>
+<div class="flex-1 bg-tertiary relative group" style="height: 30%;">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-base opacity-0 group-hover:opacity-100 bg-tertiary text-on-primary text-[10px] py-1 px-2 rounded transition-opacity">L</div>
+</div>
+</div>
+<div class="flex justify-between mt-sm text-secondary font-label-bold text-[12px]">
+<span>LAST 7 GAMES</span>
+<span class="text-primary">5-2 RECORD</span>
+</div>
+</div>
+<!-- Division Standing -->
+<div class="bg-primary-container text-on-primary-container p-lg rounded-xl">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label-bold">DIVISION STANDING</span>
+<span class="material-symbols-outlined text-on-primary-container/60">trending_up</span>
+</div>
+<div class="flex items-end gap-md">
+<span class="text-[48px] font-bold leading-none">2nd</span>
+<div class="pb-base">
+<p class="font-body-md leading-tight">3.5 GB</p>
+<p class="text-on-primary-container/70 text-[12px]">AL Central</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Team News / Quick Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="bg-surface-container-lowest data-card p-md rounded-xl flex items-center gap-md">
+<div class="p-sm bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="stadium">stadium</span>
+</div>
+<div>
+<p class="text-secondary text-[12px] font-label-bold">AVG ATTENDANCE</p>
+<p class="font-title-md text-primary">34,102</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest data-card p-md rounded-xl flex items-center gap-md">
+<div class="p-sm bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="medical_services">medical_services</span>
+</div>
+<div>
+<p class="text-secondary text-[12px] font-label-bold">INJURY REPORT</p>
+<p class="font-title-md text-primary">2 Active</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest data-card p-md rounded-xl flex items-center gap-md">
+<div class="p-sm bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="text-secondary text-[12px] font-label-bold">NEXT PAYROLL</p>
+<p class="font-title-md text-primary">$1.4M</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-base pb-safe h-20 border-t border-outline-variant bg-surface dark:bg-inverse-surface">
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-fixed-variant text-on-primary-container dark:text-on-primary-fixed-variant rounded-full px-4 py-1 transition-all duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-bold text-[10px]">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 transition-all duration-150 active:scale-90 hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-bold text-[10px]">Roster</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 transition-all duration-150 active:scale-90 hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-bold text-[10px]">Stats</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 transition-all duration-150 active:scale-90 hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-bold text-[10px]">Profile</span>
+</a>
+</nav>
+<!-- FAB -->
+<button class="fixed bottom-24 right-margin-mobile md:bottom-lg md:right-margin-desktop bg-tertiary-container text-on-tertiary-container w-14 h-14 rounded-xl shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<script>
+        // Simple interactivity for the chart
+        const chartBars = document.querySelectorAll('.flex-1');
+        chartBars.forEach(bar => {
+            bar.addEventListener('mouseenter', () => {
+                bar.style.filter = 'brightness(1.2)';
+            });
+            bar.addEventListener('mouseleave', () => {
+                bar.style.filter = 'none';
+            });
+        });
+    </script>
+</body></html>

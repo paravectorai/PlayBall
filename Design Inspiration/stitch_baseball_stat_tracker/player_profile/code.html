@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Player Profile: Marcus Rivera</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#d7dadf",
+                    "surface-container-high": "#e5e8ee",
+                    "on-secondary-container": "#626566",
+                    "on-tertiary-fixed-variant": "#842500",
+                    "on-surface": "#181c20",
+                    "surface-bright": "#f7f9ff",
+                    "primary-fixed-dim": "#a5d0b9",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#414844",
+                    "primary-fixed": "#c1ecd4",
+                    "tertiary-fixed": "#ffdbd0",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#711f00",
+                    "surface-container": "#ebeef3",
+                    "tertiary": "#4c1200",
+                    "on-primary-container": "#86af99",
+                    "inverse-primary": "#a5d0b9",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#454748",
+                    "primary": "#012d1d",
+                    "on-background": "#181c20",
+                    "inverse-on-surface": "#eef1f6",
+                    "primary-container": "#1b4332",
+                    "secondary-fixed-dim": "#c5c7c8",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#c1c8c2",
+                    "surface": "#f7f9ff",
+                    "on-primary-fixed-variant": "#274e3d",
+                    "tertiary-fixed-dim": "#ffb59e",
+                    "surface-variant": "#e0e3e8",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#e1e3e4",
+                    "surface-container-highest": "#e0e3e8",
+                    "on-primary-fixed": "#002114",
+                    "surface-container-low": "#f1f4f9",
+                    "on-tertiary-container": "#ff835a",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#e1e3e4",
+                    "inverse-surface": "#2d3135",
+                    "background": "#f7f9ff",
+                    "on-secondary-fixed": "#191c1d",
+                    "secondary": "#5c5f60",
+                    "on-error": "#ffffff",
+                    "outline": "#717973",
+                    "on-tertiary-fixed": "#390b00",
+                    "surface-tint": "#3f6653"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "sm": "12px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "lg": "24px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px",
+                    "base": "4px",
+                    "xs": "8px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "data-mono": ["Inter"],
+                    "label-bold": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "title-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "data-mono": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #f7f9ff; font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .stat-card { border: 1px solid #e0e3e8; transition: border-color 0.2s; }
+        .stat-card:hover { border-color: #3f6653; }
+        .chart-container { height: 200px; position: relative; }
+        .line-graph-path { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: dash 2s linear forwards; }
+        @keyframes dash { to { stroke-dashoffset: 0; } }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="pb-24">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-primary dark:bg-primary-container border-b border-outline-variant">
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-on-primary/20 flex items-center justify-center overflow-hidden">
+<img alt="Team Logo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtP9YQtvjozC7fzdLC20bET9Dsokw5Z4v8jg1uGtJEZALi3WixXGlP2SKVicViCS_Q3duLHwGDRVkKpV4RN-ix1Dtk3IR5NK-H6jbj8QBYkTIZ0T03Sr7nem2vv_44gmNzb99KBO7AHNiQr0HDsdiECP6Iy6KKKsMo6S1ownphk-j-yepPGfPZoFS4BrAYpWYUsIdMWLdRDrLqntie7gtiVcY4GSAhXcvGVq4n16MAWliWnkIgHW3JuF9E"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-on-primary dark:text-on-primary-container">Team Tracker</h1>
+</div>
+<div class="text-on-primary/70 font-label-bold text-label-bold">2024 Season</div>
+</header>
+<main class="mt-20 px-margin-mobile max-w-screen-xl mx-auto space-y-lg">
+<!-- Player Hero Section -->
+<section class="relative bg-surface-container-lowest rounded-xl p-lg overflow-hidden border border-outline-variant">
+<div class="flex flex-col md:flex-row gap-lg items-center md:items-end">
+<div class="relative w-32 h-32 md:w-48 md:h-48 rounded-lg overflow-hidden border-2 border-primary">
+<img class="w-full h-full object-cover" data-alt="A professional close-up portrait of a focused baseball player named Marcus Rivera in a crisp dark green and white team uniform. He has a determined expression, set against the blurred stadium background with soft, high-key afternoon lighting. The image maintains a clean, modern corporate aesthetic with high contrast and vibrant color saturations typical of elite sports photography." src="https://lh3.googleusercontent.com/aida/AP1WRLtnj8TV7NS56tKHNHnDYIQHBp7hOsQYtnCzmzPvuz80tVupGga_2EQYCf6Sg5lGv5W1lJVJlHHQE5olIOS9vBLI8Ncjv-nTbjpygpQMtfAQXnfX8eRqLvgsnjVC5TlqmdiwUZZqzbssr_2qBZxir9N_RqJqZpNxaWRnjGcFgxQ9COFPb4gKBwHoNAvxnnrd3R0mVrq-uheynn7EcNMCmMyt9ZGIm6BKHROc2Qgf8UuSeUT7H31ayuNZIQ"/>
+</div>
+<div class="flex-1 text-center md:text-left space-y-xs">
+<div class="flex items-center justify-center md:justify-start gap-xs">
+<span class="bg-primary text-on-primary px-xs py-1 rounded text-[12px] font-bold">CF | #24</span>
+<span class="text-secondary font-label-bold text-label-bold">All-Star '23</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tight">Marcus Rivera</h2>
+<p class="text-on-surface-variant font-body-md text-body-md max-w-lg">Veteran center fielder known for high contact rates and elite defensive range. Entering 8th season with the Emerald City Athletics.</p>
+</div>
+<div class="flex gap-xs pb-1">
+<button class="bg-primary text-on-primary px-lg py-sm rounded font-label-bold text-label-bold hover:scale-95 transition-transform">Compare</button>
+<button class="border-2 border-primary text-primary px-lg py-sm rounded font-label-bold text-label-bold hover:bg-primary-container/10">Full Game Log</button>
+</div>
+</div>
+</section>
+<!-- Bento Grid Stats -->
+<section class="grid grid-cols-2 md:grid-cols-5 gap-md">
+<div class="stat-card bg-surface-container-lowest p-md rounded-lg flex flex-col items-center justify-center">
+<span class="text-secondary font-label-bold text-label-bold uppercase">AVG</span>
+<span class="font-display-lg text-display-lg text-primary">.312</span>
+<span class="text-on-primary-container font-label-bold text-[12px]">+0.004 vs LY</span>
+</div>
+<div class="stat-card bg-surface-container-lowest p-md rounded-lg flex flex-col items-center justify-center">
+<span class="text-secondary font-label-bold text-label-bold uppercase">OBP</span>
+<span class="font-display-lg text-display-lg text-primary">.389</span>
+<span class="text-on-primary-container font-label-bold text-[12px]">League Top 5%</span>
+</div>
+<div class="stat-card bg-surface-container-lowest p-md rounded-lg flex flex-col items-center justify-center">
+<span class="text-secondary font-label-bold text-label-bold uppercase">SLG</span>
+<span class="font-display-lg text-display-lg text-primary">.542</span>
+<span class="text-tertiary-container font-label-bold text-[12px]">Career High</span>
+</div>
+<div class="stat-card bg-surface-container-lowest p-md rounded-lg flex flex-col items-center justify-center">
+<span class="text-secondary font-label-bold text-label-bold uppercase">HR</span>
+<span class="font-display-lg text-display-lg text-primary">18</span>
+<span class="text-on-surface-variant font-label-bold text-[12px]">On pace: 24</span>
+</div>
+<div class="stat-card bg-surface-container-lowest p-md rounded-lg flex flex-col items-center justify-center col-span-2 md:col-span-1">
+<span class="text-secondary font-label-bold text-label-bold uppercase">RBI</span>
+<span class="font-display-lg text-display-lg text-primary">64</span>
+<span class="text-on-surface-variant font-label-bold text-[12px]">Tied Team Lead</span>
+</div>
+</section>
+<!-- Performance Trends (Graph) -->
+<section class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant">
+<div class="flex justify-between items-center mb-lg">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Batting Average Trend</h3>
+<p class="text-on-surface-variant text-label-bold">Performance over the last 10 games</p>
+</div>
+<div class="flex gap-base">
+<span class="w-3 h-3 bg-primary rounded-full"></span>
+<span class="text-[12px] font-label-bold text-secondary">Daily AVG</span>
+</div>
+</div>
+<div class="chart-container">
+<svg class="w-full h-full overflow-visible" viewbox="0 0 1000 200">
+<!-- Grid Lines -->
+<line stroke="#e0e3e8" stroke-width="1" x1="0" x2="1000" y1="0" y2="0"></line>
+<line stroke="#e0e3e8" stroke-dasharray="4" stroke-width="1" x1="0" x2="1000" y1="50" y2="50"></line>
+<line stroke="#e0e3e8" stroke-width="1" x1="0" x2="1000" y1="100" y2="100"></line>
+<line stroke="#e0e3e8" stroke-dasharray="4" stroke-width="1" x1="0" x2="1000" y1="150" y2="150"></line>
+<line stroke="#e0e3e8" stroke-width="1" x1="0" x2="1000" y1="200" y2="200"></line>
+<!-- Graph Path -->
+<path class="line-graph-path" d="M 0 120 L 100 130 L 200 80 L 300 90 L 400 40 L 500 110 L 600 70 L 700 85 L 800 30 L 900 60 L 1000 50" fill="none" stroke="#3f6653" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+<!-- Points -->
+<circle cx="0" cy="120" fill="#3f6653" r="6"></circle>
+<circle cx="100" cy="130" fill="#3f6653" r="6"></circle>
+<circle cx="200" cy="80" fill="#3f6653" r="6"></circle>
+<circle cx="300" cy="90" fill="#3f6653" r="6"></circle>
+<circle cx="400" cy="40" fill="#3f6653" r="6"></circle>
+<circle cx="500" cy="110" fill="#3f6653" r="6"></circle>
+<circle cx="600" cy="70" fill="#3f6653" r="6"></circle>
+<circle cx="700" cy="85" fill="#3f6653" r="6"></circle>
+<circle cx="800" cy="30" fill="#3f6653" r="6"></circle>
+<circle cx="900" cy="60" fill="#3f6653" r="6"></circle>
+<circle cx="1000" cy="50" fill="#3f6653" r="6"></circle>
+</svg>
+<div class="flex justify-between mt-sm text-[10px] font-label-bold text-secondary uppercase tracking-widest">
+<span>G-10</span>
+<span>G-08</span>
+<span>G-06</span>
+<span>G-04</span>
+<span>G-02</span>
+<span>Today</span>
+</div>
+</div>
+</section>
+<!-- Advanced Metrics Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<section class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant">
+<h4 class="font-title-md text-title-md text-on-surface mb-md">Spray Chart Summary</h4>
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-center">
+<span class="text-body-md text-on-surface-variant font-label-bold">Left Field</span>
+<div class="flex-1 mx-lg h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 25%"></div>
+</div>
+<span class="font-data-mono text-data-mono text-primary">25%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md text-on-surface-variant font-label-bold">Center Field</span>
+<div class="flex-1 mx-lg h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 45%"></div>
+</div>
+<span class="font-data-mono text-data-mono text-primary">45%</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md text-on-surface-variant font-label-bold">Right Field</span>
+<div class="flex-1 mx-lg h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 30%"></div>
+</div>
+<span class="font-data-mono text-data-mono text-primary">30%</span>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest rounded-xl p-lg border border-outline-variant">
+<h4 class="font-title-md text-title-md text-on-surface mb-md">Season Milestones</h4>
+<div class="space-y-sm">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary mt-1">workspace_premium</span>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface">500th Career Hit</p>
+<p class="text-[12px] text-on-surface-variant">Achieved on June 12 vs Chicago</p>
+</div>
+</div>
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary mt-1">trending_up</span>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface">15-Game Hitting Streak</p>
+<p class="text-[12px] text-on-surface-variant">Longest in current season league-wide</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-base pb-safe h-20 bg-surface dark:bg-inverse-surface border-t border-outline-variant">
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-bold text-label-bold">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-fixed-variant text-on-primary-container dark:text-on-primary-fixed-variant rounded-full px-4 py-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-bold text-label-bold">Roster</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-bold text-label-bold">Stats</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-bold text-label-bold">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction for the graph points
+        document.querySelectorAll('.chart-container circle').forEach(circle => {
+            circle.addEventListener('mouseenter', function() {
+                this.setAttribute('r', '10');
+                this.style.transition = 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+            circle.addEventListener('mouseleave', function() {
+                this.setAttribute('r', '6');
+            });
+        });
+
+        // Simple active state toggle for navigation (Visual Demo only)
+        const navButtons = document.querySelectorAll('nav button');
+        navButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                navButtons.forEach(b => {
+                    b.classList.remove('bg-primary-container', 'dark:bg-primary-fixed-variant', 'text-on-primary-container', 'dark:text-on-primary-fixed-variant', 'rounded-full');
+                    b.classList.add('text-secondary', 'dark:text-secondary-fixed-dim');
+                    const icon = b.querySelector('.material-symbols-outlined');
+                    if(icon) icon.style.fontVariationSettings = "'FILL' 0";
+                });
+                btn.classList.add('bg-primary-container', 'dark:bg-primary-fixed-variant', 'text-on-primary-container', 'dark:text-on-primary-fixed-variant', 'rounded-full');
+                btn.classList.remove('text-secondary', 'dark:text-secondary-fixed-dim');
+                const icon = btn.querySelector('.material-symbols-outlined');
+                if(icon) icon.style.fontVariationSettings = "'FILL' 1";
+            });
+        });
+    </script>
+</body></html>
